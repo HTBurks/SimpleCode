@@ -1,0 +1,102 @@
+//bankingclientandbalance
+#include<fstream>
+#include<iostream>
+using namespace  std;
+/*
+**This code makes a clients bank acount and writes it to a file 
+*/
+ 
+struct client
+{
+	string fname;
+	string lname;
+	double balance;
+	
+	
+};
+//function to write to a file
+
+void writeToFile(client cl[],int size)
+{
+	int i;
+	ofstream outData;
+	outData.open("clients.dat");
+	
+	
+	for(i=0; i< size;i++)
+	{
+		outData<<"Name:"<<cl[i].fname<<" "<<cl[i].lname<<" "<<"Balance: "cl[i].balance<<endl;
+	}
+	
+	outData.close();
+}
+
+//function to read a file and  display a report
+
+void report()
+{
+	string data;
+	ifstream inData;
+	inData.open("clients.dat");
+	
+	inData >>data;
+	cout<<""<<data<<endl;
+	
+	inData >>data;
+	cout<<""<<data<<endl;
+	inData >>data;
+	cout<<""<<data<<endl;
+	
+		inData >>data;
+	cout<<""<<data<<endl;
+	inData >>data;
+	cout<<""<<data<<endl;
+	
+		inData >>data;
+	cout<<""<<data<<endl;
+	inData >>data;
+	cout<<""<<data<<endl;
+	
+	
+	
+	inData.close();
+	
+}
+//function to populate the data buffer
+void dataEntry(client cl[], int size)
+{
+	int i;
+	for (i = 0; i < size; i++)
+	{
+		cout<<"client : "<<(i+1)<<endl;
+		cout<<"**************"<<endl;
+		cout<<"First name: ";
+		cin>>cl[i].fname;
+		cout <<"Last name: ";
+		cin>>cl[i].lname;
+		cout<<"Balance = ";
+		cin>> cl[i].balance;
+		system("CLS");
+	}
+}
+//main
+
+int main()
+{
+	
+	int size;
+	cout <<" How many accounts would you like to make?";
+	cin>> size;
+	
+	client c[size];
+	
+	dataEntry(c, size);
+	//call the function to write to file
+	
+	
+	writeToFile(c,size);
+	
+	//call report
+	report();
+	return 0;
+}
